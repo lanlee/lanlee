@@ -1,0 +1,489 @@
+<!DOCTYPE HTML>
+<html id="taskContent">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="initial-scale=1,user-scalable=no,minimum-scale=1,maximum-scale=1,width=device-width" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, viewport-fit=cover" />
+
+    <link rel="stylesheet" type="text/css" href="code/styles/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="code/styles/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="code/fonts/css/fontawesome-all.min.css">    
+    <link rel="manifest" href="_manifest.json" data-pwa-version="set_in_manifest_and_pwa_js">
+    <link rel="apple-touch-icon" sizes="180x180" href="code/app/icons/icon-144x144.png">
+
+    <script type="text/javascript" src="code/scripts/swiped.js"></script>
+
+    <script type="text/javascript" src="code/scripts/jquery.min.js"></script>
+    <script type="text/javascript" src="code/scripts/bmob.js"></script>
+    <script type="text/javascript" src="code/scripts/user.js"></script> 
+    <script type="text/javascript" src="code/scripts/bootstrap.min.js"></script>
+    <title>Assembo</title>
+
+<style>
+    li, .foo {
+        list-style: none;
+    }
+    
+    ol {
+        margin: 0 0 10px;
+        padding: 0;
+    }
+
+    #container {
+    width: 20px;
+    height: 20px;
+    border-radius: 20px;
+    }
+    #name {
+    width: 100%;
+    text-align: center;
+    color: white;
+    font-size: 12px;
+    line-height: 20px;
+    }
+</style>
+
+
+</head>
+    
+<body class="theme-light">
+
+
+<div id="page">
+    
+    <div class="header header-fixed header-logo-center ">
+        <a href="_cn-1index.html" class="header-title">任务内容</a>
+        <a href="_cn-1index.html" class="header-icon header-icon-1"><i class="fas fa-chevron-left"></i></a>
+
+    </div>
+
+    <div class="page-title-clear"></div>
+        
+    <div class="page-content">
+                   
+        <div class="card card-style">
+            <div class="content">
+                <div id="showPage" class="mt-0"></div>
+                <script>
+                    if(Bmob.User.current() === null){
+                        document.getElementById("showPage").innerHTML += '<div data-menu="ad-timed-3" data-timed-ad="5" data-auto-show-ad="0"></div>';
+                    } else{
+                        var taskid = window.location.search;
+                        taskid = taskid.replace('?task=','');
+                        //addACL(Bmob.User.current(),taskid);
+                        console.log(Bmob.User.current().id)
+                        //alert("You are added to this task!")
+                    }
+                </script>
+
+                <!--project tag-->
+                <div class="d-flex">
+                    <div class="pe-5">
+                        <button id="projectTag" class="btn mb-2 rounded-m font-15"></button>
+                    </div>
+                    <div class="ps-5">
+                    <a data-menu="inviteFriend">
+                        <h3 class="ps-5 font-16">
+                        添加队友 
+                        <button class="btn rounded-circle bg-dark-dark"><i class="fas fa-user"></i></button>
+                    </h3>
+                    </a>
+                    </div>
+                </div>                  
+                
+                <!--task title-->
+                <h3 id="title" class="mt-2"></h3>
+
+                <!--task description-->
+                <p id="description" class="font-15 mb-n1 color-dark-dark"></p>
+
+                <!--user created and date info-->
+                <div class="mt-2 d-flex">
+                    <div id="container" class="align-self-center bg-dark-dark">
+                        <div id="name"></div>
+                    </div>
+                    <div class="w-35 ps-1">
+                        <em><span id="username"></span> 更新于 <span id="createTime"></span></em>
+                    </div>
+                </div>
+
+                <div class="divider mt-2 mb-3"></div>
+
+                <!--lastest 3 update child nodes click to see updateList-->
+                <p class="font-600 font-15 color-black mb-2">最新更新</p>
+                <div class="card card-style">
+                    <div class="content">
+                    <ol class="updateList">
+                        <p id="t" class="font-15 mt-1 mb-0 color-dark-dark"></p>
+                        <p id="d" class="font-14 mb-0 color-dark-dark opacity-70"></p>                
+                    </ol>
+                    </div>
+                </div>
+
+                <!--start and end time/duration-->
+                <div class="mt-2 mb-3 d-flex">
+                    <div class="w-70 border-right pe-2">
+                        <p class="font-600 font-15 color-black mb-2">起始截止时间</p>
+                    </div>
+                    <div class="w-30">
+                        <p class="font-14 mb-n1 color-dark-dark">
+                            从 <span id="startDate"></span> 到 <span id="endDate"></span>
+                        </p>                    
+                    </div>
+                </div>
+
+                <div class="divider mt-0 mb-3"></div>
+
+                <!--uploaded img-->
+                <div class="mt-2 mb-3 d-flex">
+                    <div class="align-self-center w-65 border-right pe-3 border-highlight">    
+                        <p class="font-600 font-15 color-black mb-2">图片</p>
+                    </div>
+                    <div class="w-65 border-right pe-3 border-highlight">
+                        <img id="imgUpload" width="50" height="50" class="rounded-s bg-gray-dark">
+                    </div>
+                    <div class="w-35 ps-3 pt-2">
+                    </div>
+                </div>
+
+                <div class="divider mt-0 mb-2"></div>
+
+                <!--access control list-->
+                <div class="mt-2 mb-4 d-flex">
+                    <div class="align-self-center w-65 border-right pe-3 border-highlight">    
+                        <p class="font-600 font-15 color-black mb-2">可见成员</p>
+                    </div>
+                    <div class="w-65 border-right pe-3 border-highlight">
+                        <p class="font-14">
+                            (此版本只支持所有人可见)
+                        </p>                
+                    </div>
+                </div>
+
+                <script>
+
+                var taskid = window.location.search;
+                taskid = taskid.replace('?task=','');
+
+                //get query object
+                var newTask = Bmob.Object.extend("newTask");
+                var query = new Bmob.Query(newTask);
+                query.get(taskid, {
+                    success: function(newTask) {
+                        var projectTag = newTask.get("projectTag");
+                        var taskTitle = newTask.get("taskTitle");
+                        var taskDescription = newTask.get("taskDescription");
+                        var startDate = newTask.get("startDate");
+                        var endDate = newTask.get("endDate");
+                        var color = "bg-green-dark";
+
+                        //var ACL = newTask.getACL();
+                        //var ACLgroup = Object.keys(ACL.permissionsById);
+                        //console.log(ACLGroup)
+
+                        function bgColor(color){
+                            if (projectTag==="研发"){
+                                color = "bg-dark-dark";
+                                return color;
+                            } else if (projectTag==="市场销售"){
+                                color = "bg-purple-dark";
+                                return color;
+                            } else if (projectTag==="人力"){
+                                color = "bg-pink-dark";
+                                return color;
+                            } else if (projectTag==="战略"){
+                                color = "bg-blue-dark";
+                                return color;
+                            } else if (projectTag==="其他"){
+                                color = "bg-gray-dark";
+                                return color;
+                            }
+                        }
+
+                        document.getElementById("projectTag").classList.add(bgColor());
+                        document.getElementById("projectTag").innerHTML = projectTag;
+                        document.getElementById("title").innerHTML = taskTitle;
+                        document.getElementById("description").innerHTML = taskDescription;
+                        document.getElementById("startDate").innerHTML = startDate;
+                        document.getElementById("endDate").innerHTML = endDate;
+                    },
+                    error: function(item, error) {
+                    }
+                });
+
+                //get latest updates from this task
+                var newUpdate = Bmob.Object.extend("newUpdate");
+                var query = new Bmob.Query(newUpdate);
+                query.equalTo("parentID",taskid);  // find updates under this task
+                query.find({
+                    success: function(results) {
+                        for (var i = 0; i < 3; i++) {
+                            var update = results[i];//update object
+
+                            var updateTitle = update.get('updateTitle');
+                            var updateDescription = update.get('updateDescription');
+                            document.getElementById("t").innerHTML = updateTitle;
+                            document.getElementById("d").innerHTML = updateDescription;
+                            var userCreatedName = update.get("userCreatedName");
+
+                            document.getElementById("username").innerHTML = userCreatedName;
+                            var initials = userCreatedName.charAt(0).toUpperCase();
+                            document.getElementById("name").innerHTML = initials;
+                            document.getElementById("createTime").innerHTML = update.createdAt;
+
+
+                            }
+                    },
+                    error: function(item, error) {
+                    }
+                });
+                    
+
+                </script>
+
+
+                <div class="card card-style">
+                    <button class="btn mt-0 font-16 font-600 accordion-btn no-effect color-theme" data-bs-toggle="collapse" data-bs-target="#collapse1">
+                        添加更新                            
+                        <i class="fa fa-plus-circle font-19 color-dark-dark accordion-icon"></i>
+                    </button>
+
+                    <div id="collapse1" class="collapse" data-parent="#accordion-1">
+                        <div class="content">
+                            <div class="">    
+                                <p class="font-600 font-15 color-black mb-3">追加更新信息</p>
+                            </div>
+                        </div>
+                        <div class="content">
+                            <div class="input-style has-borders no-icon validate-field mb-4">
+                                <input id="updateTitle" placeholder="标题（如，AutoCAD V1 图纸更新了这部分）">
+                                </div>
+
+                            <div class="input-style has-borders no-icon validate-field mb-4">
+                                <input id="updateDescription" placeholder="简述（如，更新了这部分的xxxxxxxxxx）">
+                            </div>
+
+                            <div>
+                                <div class="file-data mt-4 pb-5">
+                                    <input type="file" id="file-upload" class="upload-file border rounded-s" accept="image/*">
+                                    <p class="upload-file-text color-dark-dark">上传更新信息相关图片(敬请期待)</p>
+                                </div>
+                                <div class="list-group list-custom-large upload-file-data disabled">
+                                    <img id="image-data" src="images/empty.png" class="img-fluid">
+                                    <a href="#" class="border-0">
+                                        <i class="fa font-14 fa-info-circle color-blue-dark"></i>
+                                        <span>文件名</span>
+                                        <strong class="upload-file-name">JS Populated</strong>
+                                    </a>        
+                                    <a href="#" class="border-0">
+                                        <i class="fa font-14 fa-weight-hanging color-brown-dark"></i>
+                                        <span>文件大小</span>
+                                        <strong class="upload-file-size">JS Populated</strong>
+                                    </a>              
+                                </div>
+                            </div>
+
+                            <button onclick="createUpdate()" class="btn btn-full btn-center-xl font-14 font-600 rounded-m bg-dark-dark">提 交</button>
+
+                            <div class="mt-5 input-style has-borders no-icon border-right pe-2">
+                                <textarea id="form7" placeholder="粘贴文字或上传文字图片，自动识别文本填入上表"></textarea>
+                            </div>
+
+                            <div>
+                                <div class="file-data mt-0 pb-4 mb-0">
+                                    <input type="file" id="file-upload" class="upload-file border rounded-s" accept="image/*">
+                                    <p class="upload-file-text color-dark-dark">上传文字图片(如微信截图)</p>
+                                </div>
+                                <p class="text-center mt-0 mb-3">（上传其他文件-敬请期待…）</p>
+
+                                <div class="list-group list-custom-large upload-file-data disabled">
+                                    <img id="image-data" src="images/empty.png" class="img-fluid">
+                                    <a href="#" class="border-0">
+                                        <i class="fa font-14 fa-info-circle color-blue-dark"></i>
+                                        <span>File Name</span>
+                                        <strong class="upload-file-name">JS Populated</strong>
+                                    </a>        
+                                    <a href="#" class="border-0">
+                                        <i class="fa font-14 fa-weight-hanging color-brown-dark"></i>
+                                        <span>File Size</span>
+                                        <strong class="upload-file-size">JS Populated</strong>
+                                    </a>        
+                                    <a href="#" class="border-0">
+                                        <i class="fa font-14 fa-tag color-red-dark"></i>
+                                        <span>File Type</span>
+                                        <strong class="upload-file-type">JS Populated</strong>
+                                    </a>        
+                                    <a href="#" class="border-0 pb-4">
+                                        <i class="fa font-14 fa-clock color-blue-dark"></i>
+                                        <span>Modified Date</span>
+                                        <strong class="upload-file-modified">JS Populated</strong>
+                                    </a>        
+                                </div>
+                            </div>
+                            <div>
+                                <button class="btn btn-full btn-center-xl font-14 font-600 rounded-m bg-dark-dark">识别文本(敬请期待)</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            <h3 class="mt-3 mb-2 ps-3 font-16">
+            <button class="btn rounded-circle bg-red-dark"><i class="fas fa-times"></i></button>
+             终止该任务
+            </h3>
+
+
+            </div>
+        </div>
+
+    
+    </div>
+
+</div>
+    <!-- Page content ends here-->
+    
+    <!--invite menu-->
+    <div id="inviteFriend" 
+    class="menu menu-box-modal rounded-m" 
+    data-menu-height="300" 
+    data-menu-width="350">
+        <div class="menu-title mb-3">
+            <h1> <i class="fa fa-bullhorn color-black"></i> 添加该任务的队友</h1>
+        </div>
+        <div class="content px-3">
+            <h6 class="mt-4 mb-3">发送邀请链接:</h6>
+            <p class="mb-4 font-14" id="inviteURL"></p>    
+            <script>
+                var newURL = new URL(window.location.protocol + "//" + window.location.host + "/code/_cn-3taskContent.html" + window.location.search);
+                document.getElementById("inviteURL").innerHTML = newURL;
+
+                function copyText(elementID) {
+                let element = document.getElementById(elementID); //select the element
+                let elementText = element.textContent; //get the text content from the element
+                copy(elementText); //use the copyText function below
+                alert('Copied: '+elementText)
+                }
+                //If you only want to put some Text in the Clipboard just use this function
+                // and pass the string to copied as the argument.
+                function copy(text) {
+                navigator.clipboard.writeText(text);
+                }
+            </script>
+            
+            <div>
+                <button onclick="copyText('inviteURL')" class="btn btn-full btn-center-xl font-16 font-600 rounded-m bg-dark-dark">复 制</button>
+            </div>
+
+            <!-- add existing teammates
+            <h6 class="mt-4 mb-3">添加现有队友:</h6>
+            <div class="input-style has-borders no-icon mb-5">
+                <select id="projectTag">
+                    <option value="default" disabled selected>现有队友</option>
+                </select>
+                <span><i class="fa fa-chevron-down"></i></span>
+            </div>            
+            <script>
+                //populate current friend option
+
+            </script>
+
+            <div>
+                <button class="btn btn-full btn-center-xl font-16 font-600 rounded-m bg-dark-dark">添 加</button>
+            </div>
+            -->
+
+        </div>
+    </div>
+
+    <!--register menu-->
+    <div id="ad-timed-3" class="menu menu-box-modal menu-box-detached" data-menu-width="cover" data-menu-height="cover" data-menu-effect="menu-over">
+        <div class="card mb-0" style="height:100vh">
+            <div class="card-top">
+                <a href="#" class="close-menu ad-time-close color-highlight"><i class="fa fa-times disabled"></i><span></span></a>
+            </div>
+            <div data-card-height="cover-full" class="card mb-0" style="background-color:rgba(255, 255, 255, 0.4)">
+                <div class="card-center">
+                    <div class="text-center">
+                        <h1 class="font-36 color-dark-dark">Assembo</h1>
+                        <p class="color-dark-dark opacity-60 mb-2 font-16"><i class="fa fa-rocket"></i> 超快速信息同步 全任务版本控制</p>
+                        <p class="color-dark-dark mt-5 mb-2 font-16"> 请注册或登陆加入该任务</p>
+    
+                        <p class="boxed-text-xl color-white opacity-50 pt-3 font-15">
+                        </p>
+    
+                    </div>
+                    
+                    <div class="content px-4">
+                        <div class="input-style input-transparent no-borders has-icon validate-field mb-4">
+                            <i class="fa fa-at color-black"></i>
+                            <input id="email" type="email" class="form-control validate-email color-black" placeholder="电子邮箱">
+                            <i class="fa fa-times disabled invalid color-red-dark"></i>
+                            <i class="fa fa-check disabled valid color-green-dark"></i>
+                        </div>
+                        <div class="input-style input-transparent no-borders has-icon validate-field mb-4">
+                            <i class="fa fa-lock color-black"></i>
+                            <input id="password" type="password" class="form-control validate-password color-black" placeholder="密码">
+                            <i class="fa fa-times disabled invalid color-red-dark"></i>
+                            <i class="fa fa-check disabled valid color-green-dark"></i>
+                        </div>  
+                        
+                            <button onclick="registerFromTask()" class="btn btn-center-m mb-3 rounded-l text-uppercase font-550 shadow-s bg-dark-dark">注 册</button>
+                            <button onclick="login()" class="btn btn-center-m mb-3 rounded-l text-uppercase font-550 shadow-s bg-dark-dark">登 录</button>
+    
+                    </div>
+    
+    
+                    
+                </div>
+            </div>
+        </div>        
+    </div>
+    
+</div>
+
+
+
+</body>
+</html>
+
+
+<!--//get latest updates from this task
+var updateList = document.querySelector('.updateList');
+var newUpdate = Bmob.Object.extend("newUpdate");
+var query = new Bmob.Query(newUpdate);
+query.equalTo("parentID",taskid);  // find updates under this task
+query.find({
+    success: function(results) {
+        for (var i = 2; i > -1; i--) {
+            var update = results[i];//update object
+            var updateTitle = [];
+
+            updateTitle[i] = update.get('updateTitle');
+            var updateDescription = update.get('updateDescription');
+
+            var newEntry = document.createElement('li');
+            newEntry.innerHTML = 
+            '<p class="font-14 mt-1 mb-0 color-dark-dark">'
+            + updateTitle
+            +'</p>'
+            +'<p class="font-14 mb-1 color-dark-dark opacity-70">'
+            + updateDescription
+            +'</p>'
+            +'<div class="divider mt-0 mb-0"></div>';
+
+            if(updateTitle.value === "" || updateDescription.value === ""){
+                return null
+            }
+
+            updateList.appendChild(newEntry);
+
+        }
+    },
+    error: function(item, error) {
+    }
+});-->

@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="initial-scale=1,user-scalable=no,minimum-scale=1,maximum-scale=1,width=device-width" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, viewport-fit=cover" />
+
+    <link rel="stylesheet" type="text/css" href="code/styles/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="code/styles/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="code/fonts/css/fontawesome-all.min.css">    
+    <link rel="manifest" href="_manifest.json" data-pwa-version="set_in_manifest_and_pwa_js">
+    <link rel="apple-touch-icon" sizes="180x180" href="code/app/icons/icon-144x144.png">
+
+    <script type="text/javascript" src="code/scripts/swiped.js"></script>
+
+    <script type="text/javascript" src="code/scripts/jquery.min.js"></script>
+    <script type="text/javascript" src="code/scripts/bmob.js"></script>
+    <script type="text/javascript" src="code/scripts/user.js"></script> 
+    <script type="text/javascript" src="code/scripts/bootstrap.min.js"></script>
+    <title>Assembo</title>
+    
+    <style>
+        li, .foo {
+            list-style: none;
+        }
+        
+        ol {
+            margin: 0 0 10px;
+            padding: 0;
+        }
+    </style>
+    
+</head>
+    
+<body class="theme-light">
+    
+<div id="page">
+    
+    <div class="header header-auto-show header-fixed header-logo-center">
+        <a href="_cn-1index.html" class="header-title"><i class="fa fa-home"></i> Assembo</a>
+        <a href="#" data-back-button class="header-icon header-icon-1"><i class="fas fa-chevron-left"></i></a>
+    </div>
+
+    <div id="footer-bar" class="footer-bar-1">
+        <a href="_cn-3timelinePage.html" class="active-nav"><i class="fa fa-bars"></i></a>
+        <a href="_cn-1index.html" class="active-nav"><i class="fas fa-home"></i></button></a>
+        <a href="_cn-5teamPage.html" class="active-nav"><i class="fa fa-users"></i></a>
+    </div>
+    
+    <div class="page-title page-title-fixed">
+        <h1>更新信息</h1>
+        <a href="_cn-4updateList.html" class="page-title-icon shadow-xl bg-theme color-yellow-dark" data-menu="menu-share"><i class="fa fa-flag"></i></a>
+    </div>
+    <div class="page-title-clear"></div>
+    
+
+    <!-- Page content starts here--> 
+    <div class="page-content">
+        <div class="wrapper">
+            <ol class="fullcardList">
+                <!--Swipe left and right instruction card-->
+                <li>
+                    <div class="card card-style">
+                        <div class="content">
+                            <div class="d-flex mt-0 mb-0">
+                                <div class="border-right pe-4 border-highlight">
+                                    <h6 class="color-green-dark"><i class="fas fa-arrow-left"></i> 左滑标记 <i class="fas fa-check"></i> 已读</h6>
+                                </div>
+                                <div class="ps-3">
+                                    <h6 class="color-yellow-dark">右滑标记 <i class="fas fa-flag"></i> 待跟进 <i class="fas fa-arrow-right"></i></h6>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+
+                <!--Actual cardlist-->
+                <ol class="cardList"></ol>
+
+                <!--Sample OKR update card-->
+                <li>
+                    <div class="card card-style">
+                        <div class="content mb-0">
+                            <button class="btn
+                             font-16 rounded-m bg-dark-dark opacity-40"><span id="projectTag">示例</span>：<span id="taskName">公司OKR</span></button>
+                        </div>
+                        <button id="updateTitle" class="btn mt-0 font-19 font-600 accordion-btn no-effect color-theme" data-bs-toggle="collapse" data-bs-target="#collapse1">
+                            公司OKR Q2更新                            
+                            <i class="fa fa-plus-circle font-19 color-dark-dark accordion-icon"></i>
+                            <div class="d-flex mt-3 mb-0">
+                                <div class="w-65 border-right pe-3 border-highlight">
+                                    <p id="updateDescription" class="font-16 font-500">
+                                        1. MVP优化迭代，保证NPS高于7<br>
+                                        2. 招聘研发总监和销售总监
+                                    </p>
+                                </div>
+                                <!--click to view picture-->
+                                <div class="w-35 ps-3">
+                                    <img src="code/img/okr-guide-7847c633.png" width="100" height="100" class="rounded-s">
+                                </div>
+                            </div>
+                            <p class="font-11 font-500 mt-0 mb-0"><em><span id="userCreated">小蓝</span> 创建于 <span id="createdAt">3:30pm GMT+8 3/1/2021</span></em></p>
+                        </button>
+
+                        <div id="collapse1" class="collapse" data-parent="#accordion-1">
+                            <div class="content">
+                                <div class="divider mt-0 mb-3"></div>
+
+                                <div class="">    
+                                    <p class="font-600 font-15 color-black mb-3">追加更新信息</p>
+                                </div>
+                            </div>
+                            <div class="content">
+                                <div class="input-style has-borders no-icon validate-field mb-4">
+                                    <input id="updateTitle" placeholder="标题（如，AutoCAD V1 图纸更新了这部分）">
+                                    </div>
+                
+                                <!--
+                                <div class="input-style has-borders no-icon mb-4">
+                                    <select id="isReview">
+                                        <option value="default" disabled selected>任务卡片/审批卡片</option>
+                                        <option value="task">任务</option>
+                                        <option value="review">审批</option>
+                                    </select>
+                                    <span><i class="fa fa-chevron-down"></i></span>
+                                </div>
+                                -->
+                
+                                <div class="input-style has-borders no-icon validate-field mb-4">
+                                    <input id="updateDescription" placeholder="简述（如，更新了这部分的xxxxxxxxxx）">
+                                </div>
+                
+                                <div>
+                                    <div class="file-data mt-4 pb-5">
+                                        <input type="file" id="file-upload" class="upload-file border rounded-s" accept="image/*">
+                                        <p class="upload-file-text color-dark-dark">上传更新信息相关图片(敬请期待)</p>
+                                    </div>
+                                    <div class="list-group list-custom-large upload-file-data disabled">
+                                        <img id="image-data" src="code/img/okr-guide-7847c633.png" class="img-fluid">
+                                        <a href="#" class="border-0">
+                                            <i class="fa font-14 fa-info-circle color-blue-dark"></i>
+                                            <span>文件名</span>
+                                            <strong class="upload-file-name">JS Populated</strong>
+                                        </a>        
+                                        <a href="#" class="border-0">
+                                            <i class="fa font-14 fa-weight-hanging color-brown-dark"></i>
+                                            <span>文件大小</span>
+                                            <strong class="upload-file-size">JS Populated</strong>
+                                        </a>              
+                                    </div>
+                                </div>
+                
+                                <button onclick="createUpdate()" class="btn btn-full btn-center-xl font-14 font-600 rounded-m bg-dark-dark">提 交</button>
+                
+                                <div class="mt-5 input-style has-borders no-icon border-right pe-2">
+                                    <textarea id="form7" placeholder="粘贴文字或上传文字图片，自动识别文本填入上表"></textarea>
+                                </div>
+        
+                                <div>
+                                    <div class="file-data mt-0 pb-4 mb-0">
+                                        <input type="file" id="file-upload" class="upload-file border rounded-s" accept="image/*">
+                                        <p class="upload-file-text color-dark-dark">上传文字图片(如微信截图)</p>
+                                    </div>
+                                    <p class="text-center mt-0 mb-3">（上传其他文件-敬请期待…）</p>
+            
+                                    <div class="list-group list-custom-large upload-file-data disabled">
+                                        <img id="image-data" src="code/img/okr-guide-7847c633.png" class="img-fluid">
+                                        <a href="#" class="border-0">
+                                            <i class="fa font-14 fa-info-circle color-blue-dark"></i>
+                                            <span>File Name</span>
+                                            <strong class="upload-file-name">JS Populated</strong>
+                                        </a>        
+                                        <a href="#" class="border-0">
+                                            <i class="fa font-14 fa-weight-hanging color-brown-dark"></i>
+                                            <span>File Size</span>
+                                            <strong class="upload-file-size">JS Populated</strong>
+                                        </a>        
+                                        <a href="#" class="border-0">
+                                            <i class="fa font-14 fa-tag color-red-dark"></i>
+                                            <span>File Type</span>
+                                            <strong class="upload-file-type">JS Populated</strong>
+                                        </a>             
+                                    </div>
+                                </div>
+                                <div>
+                                    <button class="btn btn-full btn-center-xl font-14 font-600 rounded-m bg-dark-dark">识别文本(敬请期待)</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+
+                <script>
+                    var cardList = document.querySelector('.cardList');
+                    var newUpdate = Bmob.Object.extend("newUpdate");
+                    var query = new Bmob.Query(newUpdate);
+                    query.equalTo("status","unread");  // find all the unread
+
+                    //event listener
+                    //cardList.addEventListener("click", swipeleft)
+        
+                    //find all updates under current user
+                    query.find({
+                    success: function(results) {
+                        alert("You have " + results.length + " unread update(s)");
+                        var updateId = [];
+        
+                        //traverse and populate
+                        for (var i = 0; i < results.length ; i++) {
+                            var update = results[i];
+                            updateId.push(results[i].id);
+                            var thisUpdateId = updateId[i];
+                            //console.log(updateId)
+                            
+                            var parentTag = update.get('parentTag');
+                            var parentTitle = update.get('parentTitle');
+                            var updateTitle = update.get('updateTitle');
+                            var updateDescription = update.get('updateDescription');
+                            var userCreatedName = update.get('userCreatedName');
+
+                            var createdAt = update.createdAt;
+                            var taskTitle;
+                            var newURL;
+                            var color = "bg-dark-dark";
+                            //var username;
+                            //function bgColor();
+                            function bgColor(color){
+                            if (parentTag==="研发"){
+                                color = "bg-dark-dark";
+                                return color;
+                            } else if (parentTag==="市场销售"){
+                                color = "bg-purple-dark";
+                                return color;
+                            } else if (parentTag==="人力"){
+                                color = "bg-pink-dark";
+                                return color;
+                            } else if (parentTag==="战略"){
+                                color = "bg-blue-dark";
+                                return color;
+                            } else if (parentTag==="其他"){
+                                color = "bg-gray-dark";
+                                return color;
+                            }
+                        }
+                        //console.log(bgColor())
+
+                        function returnId(clicked_id){
+                            alert(clicked_id);
+                        }
+                            console.log(thisUpdateId)
+
+                            var newCard = document.createElement('li');
+                            newCard.innerHTML = 
+                                '<div id="'
+                                + thisUpdateId
+                                +'" class="test">'
+                                +'<div class="card card-style">'
+                                +'<div class="content mb-0">'
+                                +'<a href="'
+                                + newURL
+                                +'">'
+                                +'<button class="btn font-14 rounded-m bg-dark-dark'
+                                +''
+                                +'">'
+                                +'<span id="projectTag">'
+                                + parentTag
+                                +' </span>'
+                                +'<span id="taskName">: '
+                                + parentTitle
+                                +' </span></button></a></div>'
+                                +'<button class="btn mt-0 font-19 font-600 accordion-btn no-effect color-theme" data-bs-toggle="collapse" data-bs-target="#collapse1">'
+                                + updateTitle
+                                + '<i class="fa fa-plus-circle font-19 color-dark-dark accordion-icon"></i>'
+                                +'<div class="d-flex mt-3 mb-0">'
+                                +'<div class="w-65 border-right pe-3 border-highlight">'
+                                +'<p class="font-16 font-500">'
+                                + updateDescription
+                                +'</p></div>'
+                                +'<div class="w-35 ps-3">'
+                                +'</div></div>'
+                                +' <p class="font-11 font-500 mt-0 mb-0"><em><span id="userCreated"> '
+                                + userCreatedName
+                                +' </span> 创建于 '
+                                +'<span id="createdAt"> '
+                                + createdAt
+                                +' </span></em></p></button>'
+                                +'<div id="collapse1" class="collapse" data-parent="#accordion-1">'
+                                +'<div class="content">'
+                                +   '<div class="divider mt-0 mb-3"></div>'
+                                +   '<div class="">'    
+                                +       '<p class="font-600 font-15 color-black mb-3">追加更新信息</p>'
+                                +'</div>'
+                                +'</div>'
+                                +'<div class="content">'
+                                +'<div class="input-style has-borders no-icon validate-field mb-4">'
+                                +   '<input placeholder="标题（如，AutoCAD V1 图纸更新了这部分）">'
+                                +   '</div>'
+                                +'<div class="input-style has-borders no-icon validate-field mb-4">'
+                                +    '<input placeholder="简述（如，更新了这部分的xxxxxxxxxx）">'
+                                +'</div>'
+                                +'<button onclick="createUpdateFromUpdate()" class="btn btn-full btn-center-xl font-14 font-600 rounded-m bg-dark-dark">提 交</button>'
+                                +'<div class="mt-5 input-style has-borders no-icon border-right pe-2">'
+                                +    '<textarea id="form7" placeholder="粘贴文字或上传文字图片，自动识别文本填入上表"></textarea>'
+                                +'</div>'
+                                +'<div class="file-data mt-0 pb-4 mb-0">'
+                                +       '<input type="file" id="file-upload" class="upload-file border rounded-s" accept="image/*">'
+                                +       '<p class="upload-file-text color-dark-dark">上传更新信息相关图片</p>'
+                                +    '</div>'
+                                +    '<div class="list-group list-custom-large upload-file-data disabled">'
+                                +       'img id="image-data" src="code/img/okr-guide-7847c633.png" class="img-fluid">'
+                                +       '<a href="#" class="border-0">'
+                                +           '<i class="fa font-14 fa-info-circle color-blue-dark"></i>'
+                                +           '<span>文件名</span>'
+                                +           '<strong class="upload-file-name">JS Populated</strong>'
+                                +       '</a>'        
+                                +       '<a href="#" class="border-0">'
+                                +           '<i class="fa font-14 fa-weight-hanging color-brown-dark"></i>'
+                                +           '<span>文件大小</span>'
+                                +           '<strong class="upload-file-size">JS Populated</strong>'
+                                +       '</a>'    
+                                +   '</div>'
+                                +'</div>'
+                                +    '<button class="mb-5 btn btn-full btn-center-xl font-14 font-600 rounded-m bg-dark-dark">识别文本</button>'
+                                +'</div>'
+                                +'</div>';
+                              
+
+                                cardList.appendChild(newCard);
+                        }
+
+
+                    Swiped.init({
+                    query: '.cardList li',
+                    list: true,
+                    left: 400,
+                    right: 400,
+                    
+                    onOpen: function(event) {
+                        let cur_updateId = this.elem.children[0].id //The id was in the 'this' just hard to find - JW
+                        console.log("cur_updateId: " + cur_updateId);
+
+                        if (this.dir > 0){
+                            //swipe right and change status to flagged
+                            var newUpdate = Bmob.Object.extend("newUpdate");
+                            var query = new Bmob.Query(newUpdate);
+                            query.get(cur_updateId, {
+                                success: function(newUpdate) {
+                                newUpdate.set('status', 'flagged');
+                                newUpdate.save();
+                                //alert("Update flagged!\nId: " + cur_updateId)
+                                },
+                                error: function(newUpdate, error) {
+                                }
+                            });
+                            this.destroy(true);
+                            console.log('openright');
+
+                        } else if (this.dir < 0) {
+                            //swipe left and change status to read
+                            var newUpdate = Bmob.Object.extend("newUpdate");
+                            var query = new Bmob.Query(newUpdate);
+                            query.get(cur_updateId, {
+                                success: function(update) {
+                                update.set('status', 'read');
+                                update.save();
+                                //alert("Update Read!\nId: " + cur_updateId)
+                                },
+                                error: function(object, error) {
+                                }
+                            });
+                            this.destroy(true);
+                            console.log('openleft');
+                            }
+                    },
+
+                    onClose: function() {
+                        console.log('close')
+                    }
+                    }); 
+
+                    console.log("updateId:")
+                    for(let i = 0; i < updateId.length; i++){
+                        console.log(i + ": " + updateId[i])
+                    }
+                            
+                    },
+                    error: function(error) {
+                        alert("Error:" + error.code + " " + error.message);
+                        }
+                    });
+                    
+
+                </script>
+            </ol>
+        </div>
+
+
+
+        </div>
+
+        
+    <!--         <div>
+            <p class="text-center">卡片处理完啦，嘿嘿</p>
+        </div>
+        Page content ends here-->
+    
+    
+</div>
+</body>
+</html>
+
+
+<!--
+var a=Swiped.init({
+    query: '.cardList li',
+    list: true,
+    left: 400,
+    right: 400,
+    
+    onOpen: function(event) {
+        //var element = document.getElementsByClassName("test")[0].id
+        //console.log(element)
+        //console.log(this.id)
+        //this.swipeUpdateId[i] = updateId[i];
+
+
+        if (this.dir > 0){
+            //swipe right and change status to flagged
+
+            var newUpdate = Bmob.Object.extend("newUpdate");
+            var query = new Bmob.Query(newUpdate);
+
+            //console.log($(this).attr("id"))
+            //get current newUpdate.id!!!
+            query.get($(this).attr("id"), {
+                success: function(newUpdate) {
+                newUpdate.set('status', 'flagged');
+                newUpdate.save();
+                alert("Update flagged!")
+                },
+                error: function(newUpdate, error) {
+                }
+            });
+            this.destroy(true);
+            console.log('openright');
+
+        } else if (this.dir < 0) {
+            //swipe left and change status to read
+            var newUpdate = Bmob.Object.extend("newUpdate");
+            var query = new Bmob.Query(newUpdate);
+            //
+            query.get(event.target.id, {
+                success: function(update) {
+                update.set('status', 'read');
+                update.save();
+                alert("Update Read!")
+                },
+                error: function(object, error) {
+                }
+            });
+            this.destroy(true);
+            console.log('openleft');
+            }
+    },
+
+    onClose: function() {
+        console.log('close')
+    }
+    }); 
+
+
+
+                                    +'<button id="'
+                                + thisUpdateId
+                                +'" onClick="reply_click(this.id)">返回Id</button>'
+-->
+

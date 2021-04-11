@@ -1,0 +1,169 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="initial-scale=1,user-scalable=no,minimum-scale=1,maximum-scale=1,width=device-width" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, viewport-fit=cover" />
+
+    <link rel="stylesheet" type="text/css" href="code/styles/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="code/styles/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="code/fonts/css/fontawesome-all.min.css">    
+    <link rel="manifest" href="_manifest.json" data-pwa-version="set_in_manifest_and_pwa_js">
+    <link rel="apple-touch-icon" sizes="180x180" href="code/app/icons/icon-144x144.png">
+
+    <script type="text/javascript" src="code/scripts/swiped.js"></script>
+
+    <script type="text/javascript" src="code/scripts/jquery.min.js"></script>
+    <script type="text/javascript" src="code/scripts/bmob.js"></script>
+    <script type="text/javascript" src="code/scripts/user.js"></script> 
+    <script type="text/javascript" src="code/scripts/bootstrap.min.js"></script>
+    <script type="text/javascript" src="code/scripts/custom.js"></script>
+    <title>Assembo</title>
+
+</head>
+    
+<body class="theme-light">
+
+<div id="page">
+    
+    <div class="header header-fixed header-logo-center ">
+        <a href="_cn-1index.html" class="header-title">添加任务</a>
+        <a href="#" data-back-button class="header-icon header-icon-1"><i class="fas fa-chevron-left"></i></a>
+    </div>
+
+    <div class="page-title-clear"></div>
+        
+    <div class="page-content">        
+        
+        <div class="card card-style">
+            <div class="content">
+                <div class="input-style has-borders no-icon mb-4">
+                    <select id="projectTag">
+                        <option value="default" disabled selected>所属项目类型</option>
+                        <option class="bg-dark-dark" value="研发">研发</option>
+                        <option class="bg-purple-dark" value="市场销售">市场销售</option>
+                        <option class="bg-green-dark" value="人力">人力</option>
+                        <option class="bg-blue-dark" value="战略">战略</option>
+                        <option class="bg-gray-dark" value="其他">其他</option>
+                    </select>
+                    <span><i class="fa fa-chevron-down"></i></span>
+                </div>
+
+                <div class="input-style has-borders no-icon validate-field mb-4">
+                    <input id="taskTitle" placeholder="标题（如，AutoCAD V1 图纸）">
+                    </div>
+
+                <!--
+                <div class="input-style has-borders no-icon mb-4">
+                    <select id="isReview">
+                        <option value="default" disabled selected>任务卡片/审批卡片</option>
+                        <option value="task">任务</option>
+                        <option value="review">审批</option>
+                    </select>
+                    <span><i class="fa fa-chevron-down"></i></span>
+                </div>
+                -->
+
+                <div class="input-style has-borders no-icon validate-field mb-4">
+                    <input id="taskDescription" placeholder="简述（如，所有的机械图纸都在这里更新）">
+                </div>
+
+                <div class="d-flex">
+                    <div class="input-style font-12 has-borders no-icon mb-4 border-right pe-4">
+                        起始日期
+                        <input id="startDate" type="date" value="起始日期" value="2021-12-31" max="2031-01-01" min="2021-01-01" class="form-control validate-text" placeholder="起始日期">
+                    </div>
+
+                    <div class="input-style font-12 has-borders no-icon mb-4">
+                        截止日期
+                        <input id="endDate" type="date" value="截止日期" value="2021-12-31" max="2031-01-01" min="2021-01-01" class="form-control validate-text" placeholder="截止日期">
+                    </div>
+                </div>
+
+                <div class="input-style has-borders no-icon mb-0">
+                    <select id="userList">
+                        <option value="default" disabled selected>可见成员(此版本只支持所有人可见)</option>
+                    </select>
+                    <span><i class="fa fa-chevron-down"></i></span>
+                </div>
+
+                <div>
+                    <div class="file-data mt-4 pb-5">
+                        <input type="file" id="fileUpload" class="upload-file border rounded-s" accept="image/*">
+                        <p class="upload-file-text color-dark-dark">上传任务相关图片</p>
+                    </div>
+                    <div class="list-group list-custom-large upload-file-data disabled">
+                        <img id="image-data" src="images/empty.png" class="img-fluid">
+                        <a href="#" class="border-0">
+                            <i class="fa font-14 fa-info-circle color-blue-dark"></i>
+                            <span>File Name</span>
+                            <strong class="upload-file-name">JS Populated</strong>
+                        </a>        
+                        <a href="#" class="border-0">
+                            <i class="fa font-14 fa-weight-hanging color-brown-dark"></i>
+                            <span>File Size</span>
+                            <strong class="upload-file-size">JS Populated</strong>
+                        </a>              
+                    </div>
+                </div>
+
+                <button onclick="createTask()" class="btn btn-full btn-center-xl font-14 font-600 rounded-m bg-dark-dark">提 交</button>
+
+            </div>
+
+            <div class="card card-style">
+                <div class="content">
+                        <div class="input-style has-borders no-icon border-right pe-2">
+                            <textarea id="form7" placeholder="粘贴文字或上传文字图片，自动识别文本填入下表"></textarea>
+                        </div>
+    
+    
+                        <div>
+                            <div class="file-data mt-0 pb-4 mb-3">
+                                <input type="file" id="file-upload" class="upload-file border rounded-s" accept="image/*">
+                                <p class="upload-file-text color-dark-dark">上传文字图片</p>
+                            </div>
+                            <p class="text-center mt-0 mb-3">（上传其他文件-敬请期待…）</p>
+    
+                            <div class="list-group list-custom-large upload-file-data disabled">
+                                <img id="image-data" src="images/empty.png" class="img-fluid">
+                                <a href="#" class="border-0">
+                                    <i class="fa font-14 fa-info-circle color-blue-dark"></i>
+                                    <span>File Name</span>
+                                    <strong class="upload-file-name">JS Populated</strong>
+                                </a>        
+                                <a href="#" class="border-0">
+                                    <i class="fa font-14 fa-weight-hanging color-brown-dark"></i>
+                                    <span>File Size</span>
+                                    <strong class="upload-file-size">JS Populated</strong>
+                                </a>            
+                            </div>
+                        </div>
+                    <div>
+                        <button class="btn btn-full btn-center-xl font-14 font-600 rounded-m bg-dark-dark">识别文本(敬请期待)</button>
+                    </div>
+                </div>
+            </div>   
+        </div>
+
+
+    
+
+
+    </div>
+
+</div>
+    <!-- Page content ends here-->
+    
+    <!-- Share Menu-->
+    <div id="menu-share" class="menu menu-box-bottom rounded-m" data-menu-load="menu-share.html" data-menu-height="370"></div>  
+  
+    
+</div>
+
+</body>
+</html>

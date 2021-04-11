@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="initial-scale=1,user-scalable=no,minimum-scale=1,maximum-scale=1,width=device-width" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, viewport-fit=cover" />
+
+    <link rel="stylesheet" type="text/css" href="code/styles/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="code/styles/style.css">
+    <link rel="stylesheet" type="text/css" href="code/styles/timelinestyle.css">
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="code/fonts/css/fontawesome-all.min.css">    
+    <link rel="manifest" href="_manifest.json" data-pwa-version="set_in_manifest_and_pwa_js">
+    <link rel="apple-touch-icon" sizes="180x180" href="code/app/icons/icon-144x144.png">
+
+    <script type="text/javascript" src="code/scripts/swiped.js"></script>
+
+    <script type="text/javascript" src="code/scripts/jquery.min.js"></script>
+    <script type="text/javascript" src="code/scripts/bmob.js"></script>
+    <script type="text/javascript" src="code/scripts/user.js"></script> 
+    <script type="text/javascript" src="code/scripts/bootstrap.min.js"></script>
+    <script type="text/javascript" src="code/scripts/timeline.js"></script>
+
+    <title>Assembo</title>
+
+
+    <style>
+        li, .foo {
+            list-style: none;
+        }
+        
+        ol {
+            margin: 0 0 10px;
+            padding: 0;
+        }
+    </style>
+
+    
+</head>
+<body>
+ <div id="page">
+    
+    <div class="header header-fixed header-logo-center ">
+        <a href="_cn-1index.html" class="header-title"><i class="fa fa-home"></i> Assembo</a>
+        <a href="_cn-1index.html" class="header-icon header-icon-1"><i class="fas fa-chevron-left"></i></a>
+
+    </div>
+
+    <div id="footer-bar" class="footer-bar-1">
+        <a href="_cn-3timelinePage.html" class="active-nav"><i class="fa fa-bars"></i></a>
+        <a href="_cn-3taskForm.html"><button class="btn rounded-circle bg-dark-dark"><i class="fas fa-plus"></i></button></a>
+        <a href="_cn-5teamPage.html" class="active-nav"><i class="fa fa-users"></i></a>
+    </div>
+    
+    <div class="page-title-clear"></div>
+    <div class="page-content">    
+        
+        <div class="card card-style">
+            <div class="content mb-0">
+                <h4 class="mb-3 color-black">所有任务</h4>
+                <div class="mb-3">
+                    <button class="btn mb-2 font-12 rounded-m bg-dark-dark">研发</button>
+                    <button class="btn mb-2 font-12 rounded-m bg-purple-dark">市场销售</button>
+                    <button class="btn mb-2 font-12 rounded-m bg-pink-dark">人力</button>
+                    <button class="btn mb-2 font-12 rounded-m bg-blue-dark">战略</button>
+                    <button class="btn mb-2 font-12 rounded-m bg-gray-dark">其他</button>
+                </div>
+
+                <ol class="cardList">                  
+                <script>
+                    var cardList = document.querySelector('.cardList');
+                    var newTask = Bmob.Object.extend("newTask");
+                    var query = new Bmob.Query(newTask);
+                    //alert(Bmob.Users.current().id)
+
+                    //find all tasks under current user
+                    query.find({
+                    success: function(results) {
+                        alert("You have " + results.length + " task(s) in progress");
+
+                        //traverse and populate
+                        for (var i = 0; i < results.length; i++) {
+                            var task = results[i];
+                            //get projectTag and taskTag
+                            var newURL = new URL(window.location.protocol + "//" + window.location.host + "/_cn-3taskContent.html");
+                            newURL.searchParams.append("task", task.id);
+
+        
+                            var taskTitle = task.get('taskTitle');
+                            var taskDescription = task.get('taskDescription');
+                            var tag = task.get("projectTag");
+                            var username;
+                            var color = "bg-green-dark";
+
+                            function bgColor(color){
+                                if (tag==="研发"){
+                                    color = "bg-dark-dark";
+                                    return color;
+                                } else if (tag==="市场销售"){
+                                    color = "bg-purple-dark";
+                                    return color;
+                                } else if (tag==="人力"){
+                                    color = "bg-pink-dark";
+                                    return color;
+                                } else if (tag==="战略"){
+                                    color = "bg-blue-dark";
+                                    return color;
+                                } else if (tag==="其他"){
+                                    color = "bg-gray-dark";
+                                    return color;
+                                }
+                            }
+        
+                            var newCard = document.createElement('li');
+                            newCard.innerHTML = 
+                                '<a href="'
+                                + newURL
+                                +'"><div class="card card-style '
+                                + bgColor()
+                                +'">'
+                                +'<div class="content mb-0">'
+                                +'<div class="font-600 font-16 mb-3">'
+                                + taskTitle
+                                +'<p class="font-16 font-200 mb-3 color-white">'
+                                + taskDescription
+                                +'</p></div></a>';
+        
+                                //if(taskTitle === "" || taskDescription === ""){
+                                //    return null
+                                //}
+        
+                                //Append to display list
+                                cardList.appendChild(newCard);
+                        }                        
+                    },
+                    error: function(error) {
+                        alert("Error:" + error.code + " " + error.message);
+                        }
+                    });
+        
+                </script>
+                </ol>
+            </div>
+        </div>
+
+        <div class="card card-style">
+            <div class="content mb-0">
+                <h4 class="mb-3 color-green-dark"><i class="fas fa-check"></i> 已读更新信息</h4>
+                <ol class="archiveList">                  
+                <script>
+                    var archiveList = document.querySelector('.archiveList');
+                    var newUpdate = Bmob.Object.extend("newUpdate");
+                    var query = new Bmob.Query(newUpdate);
+                    query.equalTo("status","read");  // find all the read
+
+                    //find all updates under current user
+                    query.find({
+                    success: function(results) {
+                        //alert("You have " + results.length + " read update(s)");
+                        
+                        var newURL = new URL(window.location.protocol + "//" + window.location.host + "/_cn-3updateContent.html");
+                        newURL.searchParams.append("task", newUpdate.id);
+
+                        //traverse and populate
+                        for (var i = 0; i < results.length; i++) {
+                            var update = results[i];
+                            //get projectTag and updateTag
+        
+                            var updateTitle = update.get('updateTitle');
+                            var updateDescription = update.get('updateDescription');
+                            var username;
+        
+                            var newCard = document.createElement('li');
+                            newCard.innerHTML = 
+                                '<a href="'
+                                + newURL
+                                +'">'
+                                +'<div class="divider mt-2 mb-3"></div>'
+                                +'<h5 class="font-14 opacity-70">'
+                                + updateTitle
+                                +'</h5>'
+                                +'<p class="line-height-s mb-3 opacity-70">'
+                                + updateDescription
+                                +'</p>'
+                                +'</a>';
+        
+                                if(updateTitle.value === "" || updateDescription.value === ""){
+                                    return null
+                                }
+        
+                                //Append to display list
+                                archiveList.appendChild(newCard);
+                        }                        
+                    },
+                    error: function(error) {
+                        alert("Error:" + error.code + " " + error.message);
+                        }
+                    });
+        
+                </script>
+                </ol>
+            </div>
+        </div>
+
+        <div class="card card-style">
+            <div class="content mb-0">
+                <h4 class="mb-3 color-black"><i class="fas fa-archive"></i> 已终止任务</h4>
+                <ol class="archiveTaskList">                  
+                <script>
+                    var archiveTaskList = document.querySelector('.archiveTaskList');
+                    var newTask = Bmob.Object.extend("newTask");
+                    var query = new Bmob.Query(newTask);
+                    query.equalTo("status","terminated");  // find all the read
+
+                    //find all tasks under current user
+                    query.find({
+                    success: function(results) {
+                        //alert("You have " + results.length + " terminated task(s)");
+
+                        var newURL = new URL(window.location.protocol + "//" + window.location.host + "/_cn-3taskContent.html");
+                        newURL.searchParams.append("task", newTask.id);
+
+                        //traverse and populate
+                        for (var i = 0; i < results.length; i++) {
+                            var task = results[i];
+                            //get projectTag and taskTag
+        
+                            var taskTitle = task.get('taskTitle');
+                            var taskDescription = task.get('taskDescription');
+                            var username;
+        
+                            var newCard = document.createElement('li');
+                            newCard.innerHTML = 
+                                '<a href="'
+                                + newURL
+                                +'">'
+                                +'<div class="divider mt-2 mb-3"></div>'
+                                +'<h5 class="font-14 opacity-70">'
+                                + taskTitle
+                                +'</h5>'
+                                +'<p class="line-height-s mb-3 opacity-70">'
+                                + taskDescription
+                                +'</p>'
+                                +'</a>';
+        
+                                if(taskTitle.value === "" || taskDescription.value === ""){
+                                    return null
+                                }
+        
+                                //Append to display list
+                                archiveTaskList.appendChild(newCard);
+                        }                        
+                    },
+                    error: function(error) {
+                        alert("Error:" + error.code + " " + error.message);
+                        }
+                    });
+        
+                </script>
+                </ol>
+            </div>
+        </div>
+
+        <div class="card-style">
+            <div class="content mb-0">
+                <h4 class="mb-3 color-black">所有任务甘特图(敬请期待)</h4>
+                <div class="chart-wrapper">
+                    <ul class="chart-values">
+                    <li>四月</li>
+                    <li>五月</li>
+                    <li>六月</li>
+                    <li>七月</li>
+                    <li>八月</li>
+                    <li>九月</li>
+                    </ul>
+                    <ul class="chart-bars">
+                    <li data-duration="四月-五月" class="bg-dark-dark">MVP上线</li>
+                    <li data-duration="五月-六月" class="bg-dark-dark opacity-80">用户增长</li>
+                    <li data-duration="五月-九月" class="bg-dark-dark opacity-40">宣传市场材料</li>
+                    </ul>
+                </div>
+              </div>
+        </div>
+
+    </div>   
+    </div>
+</div>
+
+
+</body>
+</html>
